@@ -3,6 +3,8 @@
     const asunto = document.getElementById('asunto')
     const mensaje = document.getElementById('mensaje')
     const btnEnviar = document.getElementById('enviar')
+    const resetBtn = document.getElementById('resetBtn')
+    const formulario = document.getElementById('enviar-mail')
 
 //Eventos
 
@@ -14,6 +16,13 @@ function eventListeners() {
     email.addEventListener('blur', validarCampo)
     asunto.addEventListener('blur',validarCampo)
     mensaje.addEventListener('blur', validarCampo)
+
+    //Boton de enviar en el submit
+    btnEnviar.addEventListener('click',enviarEmail)
+
+    //Boton de reset
+    resetBtn.addEventListener('click',reset)
+
 }
 
 
@@ -53,6 +62,38 @@ function validarCampo() {
     }
 }
 
+// Cuando se envia el correo
+
+function enviarEmail(e) {
+    
+    
+    //Spinner al presionar Enviar
+    const spinnerGif = document.querySelector('#spinner')
+    spinnerGif.style.display = 'block'
+
+    // Gif que envia email
+    const enviado = document.createElement('img')
+    enviado.src = 'img/mail.gif'
+    enviado.style.display = 'block'
+
+    //Ocultar Spinner y mostrar gif de enviado
+
+    setTimeout(function(){
+        spinnerGif.style.display = 'none'
+
+        document.querySelector('#loaders').appendChild(enviado)
+    },3000)
+
+    setTimeout(function(){
+        enviado.remove()
+
+        formulario.reset()
+    },5000)
+
+    e.preventDefault()
+}
+
+// Verifica la longitud del texto en los campos
 function validarLongitud(campo) {
 
     if(campo.value.length >0){
@@ -74,4 +115,10 @@ function validarMail(campo){
         campo.style.borderBottomColor = 'red'
         campo.classList.add('error')
     } 
+}
+// Resetear el formulario
+function reset(e){
+    
+    formulario.reset()
+    e.preventDefault
 }
