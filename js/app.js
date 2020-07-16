@@ -65,7 +65,7 @@ function validarCampo() {
 // Cuando se envia el correo
 
 function enviarEmail(e) {
-    
+    e.preventDefault()
     
     //Spinner al presionar Enviar
     const spinnerGif = document.querySelector('#spinner')
@@ -82,15 +82,14 @@ function enviarEmail(e) {
         spinnerGif.style.display = 'none'
 
         document.querySelector('#loaders').appendChild(enviado)
-    },3000)
+    },5000)
 
     setTimeout(function(){
         enviado.remove()
 
         formulario.reset()
-    },5000)
+    },8000)
 
-    e.preventDefault()
 }
 
 // Verifica la longitud del texto en los campos
